@@ -6,8 +6,22 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerSchema } from '@/actions/user/register/schema'
+import { useActionState, useEffect, startTransition, useRef } from 'react'
+import { register } from '@/actions/user/register'
+import toast from 'react-hot-toast'
+import { RegisterFormState } from './types'
 
 export function RegisterForm() {
+  const formRef = useRef<HTMLFormElement>(null)
+  const [formState, formAction, isPending] = useActionState<RegisterFormState, z.infer<typeof registerSchema>>(
+    register,
+    {
+      errorMessage: '',
+      successMessage: '',
+      fields: {},
+    },
+  )
+
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -15,17 +29,28 @@ export function RegisterForm() {
       email: '',
       password: '',
       passwordConfirmation: '',
+      ...(formState.fields ?? {}),
     },
   })
 
-  const onSubmit = (values: z.infer<typeof registerSchema>) => {
-    console.log({ values })
+  const onSubmit = (data: z.infer<typeof registerSchema>) => {
+    startTransition(() => {
+      formAction(data)
+    })
   }
+
+  useEffect(() => {
+    if (formState.errorMessage) toast.error(formState.errorMessage)
+    if (formState.successMessage) {
+      toast.success(formState.successMessage)
+      form.reset()
+    }
+  }, [formState, form])
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm">
+        <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -70,7 +95,7 @@ export function RegisterForm() {
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Digite sua senha"
                       className="h-10 border-gray-700 bg-gray-800 text-gray-100"
                       {...field}
                     />
@@ -98,8 +123,12 @@ export function RegisterForm() {
               )}
             />
           </div>
-          <Button className="mt-6 h-11 w-full bg-blue-600 text-sm font-medium hover:bg-blue-700" type="submit">
-            Registrar
+          <Button
+            className="mt-6 h-11 w-full bg-blue-600 text-sm font-medium hover:bg-blue-700"
+            type="submit"
+            disabled={isPending}
+          >
+            {isPending ? 'Registrando...' : 'Registrar'}
           </Button>
         </form>
 
