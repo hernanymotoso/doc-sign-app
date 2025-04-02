@@ -1,6 +1,10 @@
 import Image from 'next/image'
+import { getUsers } from '@/db/queries/users'
 
-export default function Home() {
+export default async function Home() {
+  const users = await getUsers()
+
+  console.log({ users })
   return (
     <div
       className="grid min-h-screen grid-rows-[20px_1fr_20px] place-items-center gap-16 p-8 pb-20
