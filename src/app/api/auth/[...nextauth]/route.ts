@@ -33,7 +33,7 @@ const handler = NextAuth({
         if (!credentials?.email || !credentials?.password) return null
         const existingUser = await findUserByEmail(credentials.email)
         if (!existingUser) return null
-        const passwordsMatch = await compare(credentials.password, existingUser.password_hash)
+        const passwordsMatch = await compare(credentials.password, existingUser.password ?? '')
         if (!passwordsMatch) return null
 
         return {
