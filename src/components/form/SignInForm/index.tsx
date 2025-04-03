@@ -99,7 +99,7 @@ export function SignInForm() {
       <div className="mt-4 text-center">
         <Button
           type="button"
-          onClick={() => signIn('github')}
+          onClick={() => signIn('github', { callbackUrl: '/dashboard', redirect: true })}
           variant="outline"
           className="inline-flex w-full items-center justify-center gap-2 border-gray-700 bg-transparent text-sm font-medium text-gray-200
             hover:bg-gray-800"
@@ -111,7 +111,7 @@ export function SignInForm() {
               clipRule="evenodd"
             />
           </svg>
-          Continuar com GitHub
+          Entrar com GitHub
         </Button>
       </div>
     </div>
