@@ -37,15 +37,18 @@ model Session {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  name       String?
-  email      String?   @unique
-  password   String?
-  image      String?
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  accounts   Account[]
-  sessions   Session[]
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime? @map("email_verified")
+  password      String?
+  image         String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("users")
 }
 
 model VerificationToken {
