@@ -49,7 +49,7 @@ export function RegisterForm() {
   }, [formState, form])
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4">
+    <div className="flex flex-col items-center justify-center px-4">
       <Form {...form}>
         <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="space-y-4">
