@@ -1,5 +1,4 @@
-// src/app/dashboard/documents/[id]/page.tsx
-import { SignatureList } from '@/components/SignatureList'
+import { SignatureList } from '@/components/context/SignatureList'
 import { Button } from '@/components/ui/Button'
 import { ViewPdfButton } from '@/components/ViewPdfButton'
 import { db } from '@/db'
