@@ -5,6 +5,7 @@ import { startTransition, useActionState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { DocumentListState } from './types'
+import { DeleteDocumentButton } from '../DeleteDocumentButton'
 
 export function DocumentList() {
   const [state, action, isPending] = useActionState<DocumentListState, number>(getDocuments, {
@@ -22,6 +23,12 @@ export function DocumentList() {
   const handlePageChange = (page: number) => {
     startTransition(() => {
       action(page)
+    })
+  }
+
+  const handleDeleteSuccess = () => {
+    startTransition(() => {
+      action(state?.currentPage || 1)
     })
   }
 
@@ -71,13 +78,14 @@ export function DocumentList() {
                   <td className="px-6 py-4">
                     {format(new Date(document.created_at), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="flex gap-4 px-6 py-4">
                     <button
                       onClick={() => window.open(document.url, '_blank')}
                       className="text-blue-500 hover:text-blue-400"
                     >
                       Visualizar
                     </button>
+                    <DeleteDocumentButton documentId={document.id} onSuccess={handleDeleteSuccess} />
                   </td>
                 </tr>
               ))}
