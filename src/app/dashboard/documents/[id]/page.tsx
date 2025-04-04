@@ -1,6 +1,6 @@
 import { SignatureList } from '@/components/context/SignatureList'
 import { Button } from '@/components/ui/Button'
-import { ViewPdfButton } from '@/components/ViewPdfButton'
+import { ViewPdfButton } from '@/components/context/ViewPdfButton'
 import { db } from '@/db'
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
