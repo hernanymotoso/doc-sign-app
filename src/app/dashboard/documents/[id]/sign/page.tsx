@@ -25,6 +25,7 @@ export default function SignDocumentPage() {
   }
 
   if (state?.success) {
+    state.success = false
     toast.success('Documento assinado com sucesso!')
     router.push('/dashboard')
   }
