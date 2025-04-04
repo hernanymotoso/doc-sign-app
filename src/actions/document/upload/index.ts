@@ -39,7 +39,7 @@ export async function uploadDocument(
     }
 
     const buffer = Buffer.from(await file.arrayBuffer())
-    const fileName = `${Date.now()}-${file.name}`
+    const fileName = `documents/${Date.now()}-${file.name}`
     const url = await uploadToS3(buffer, fileName)
 
     await db.document.create({

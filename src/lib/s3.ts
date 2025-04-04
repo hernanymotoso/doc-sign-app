@@ -14,15 +14,19 @@ export const s3Client = new S3Client({
 })
 
 export async function uploadToS3(file: Buffer, fileName: string): Promise<string> {
+  const key = `doc-sign-app/${fileName}`
+  const fileExtension = fileName.split('.').pop()?.toLowerCase()
+  const contentType = fileExtension === 'png' ? 'image/png' : 'application/pdf'
+
   const command = new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `doc-sign-app/documents/${fileName}`,
+    Key: key,
     Body: file,
-    ContentType: 'application/pdf',
+    ContentType: contentType,
     ACL: 'public-read',
   })
 
   await s3Client.send(command)
 
-  return `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/doc-sign-app/documents/${fileName}`
+  return `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${key}`
 }
