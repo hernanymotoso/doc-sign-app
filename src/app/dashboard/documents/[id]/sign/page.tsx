@@ -1,6 +1,6 @@
 'use client'
 
-import { SignatureCanvas } from '@/components/SignatureCanvas'
+import { SignatureCanvas } from '@/components/context/SignatureCanvas'
 import { createSignature } from '@/actions/signature/create'
 import { useParams, useRouter } from 'next/navigation'
 import { startTransition, useActionState } from 'react'
