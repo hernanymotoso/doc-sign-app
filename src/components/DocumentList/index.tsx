@@ -5,7 +5,7 @@ import { startTransition, useActionState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { DocumentListState } from './types'
-import { DeleteDocumentButton } from '../DeleteDocumentButton'
+import { DeleteDocumentButton } from '../context/DeleteDocumentButton'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 
