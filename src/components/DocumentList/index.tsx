@@ -14,12 +14,6 @@ export function DocumentList() {
     currentPage: 1,
   })
 
-  useEffect(() => {
-    startTransition(() => {
-      action(1)
-    })
-  }, [action])
-
   const handlePageChange = (page: number) => {
     startTransition(() => {
       action(page)
@@ -31,6 +25,12 @@ export function DocumentList() {
       action(state?.currentPage || 1)
     })
   }
+
+  useEffect(() => {
+    startTransition(() => {
+      action(1)
+    })
+  }, [action])
 
   if (!state) {
     return (
@@ -66,7 +66,7 @@ export function DocumentList() {
                 <th scope="col" className="px-6 py-3">
                   Data de criação
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-right">
                   Ações
                 </th>
               </tr>
@@ -78,7 +78,7 @@ export function DocumentList() {
                   <td className="px-6 py-4">
                     {format(new Date(document.created_at), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
                   </td>
-                  <td className="flex gap-4 px-6 py-4">
+                  <td className="flex justify-end gap-4 px-6 py-4">
                     <button
                       onClick={() => window.open(document.url, '_blank')}
                       className="text-blue-500 hover:text-blue-400"
