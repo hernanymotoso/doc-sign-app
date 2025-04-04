@@ -92,12 +92,14 @@ export function DocumentList() {
                   </td>
 
                   <td className="flex justify-end gap-2 px-6 py-4">
-                    <Button asChild variant="ghost" size="icon">
-                      <Link href={`/dashboard/documents/${document.id}`}>
-                        <FileSignature className="size-4" />
-                        <span className="sr-only">Ver assinaturas</span>
-                      </Link>
-                    </Button>
+                    {document.status === 'SIGNED' && (
+                      <Button asChild variant="ghost" size="icon">
+                        <Link href={`/dashboard/documents/${document.id}`}>
+                          <FileSignature className="size-4" />
+                          <span className="sr-only">Ver assinaturas</span>
+                        </Link>
+                      </Button>
+                    )}
 
                     <Button
                       onClick={() => window.open(document.url, '_blank')}
