@@ -72,6 +72,10 @@ export function DocumentList() {
                   Data de criação
                 </th>
 
+                <th scope="col" className="hidden px-6 py-3 md:table-cell">
+                  Status
+                </th>
+
                 <th scope="col" className="px-6 py-3 text-right">
                   Ações
                 </th>
@@ -89,6 +93,18 @@ export function DocumentList() {
 
                   <td className="hidden px-6 py-4 md:table-cell">
                     {format(new Date(document.created_at), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
+                  </td>
+
+                  <td className="hidden px-6 py-4 md:table-cell">
+                    <span
+                      className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
+                      document.status === 'SIGNED'
+                          ? 'bg-green-400/10 text-green-400'
+                          : 'bg-yellow-400/10 text-yellow-400'
+                      }`}
+                    >
+                      {document.status === 'SIGNED' ? 'Assinado' : 'Pendente'}
+                    </span>
                   </td>
 
                   <td className="flex justify-end gap-2 px-6 py-4">

@@ -2,6 +2,11 @@
 
 A web application for secure document signing and management.
 
+## Demo
+
+[Watch the full demo video](https://drive.google.com/file/d/1bV26x6mou6M6F53QzLSUghajZxqKTr3Z/view?usp=sharing)
+
+
 ## Getting Started
 
 ### Prerequisites
@@ -56,9 +61,9 @@ cd doc-sign-app
 docker-compose up -d
 ```
 
-2. Run database migrations:
+2. Run database migrations (optional):
 ```bash
-docker-compose exec app npx prisma migrate dev
+docker-compose exec app yarn prisma migrate dev
 ```
 
 The application will be available at `http://localhost:3000`.

@@ -16,13 +16,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions)
+  console.log({ session })
 
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
         <SessionProvider>
-          {session?.user && <Header />}
-          <div className={session?.user ? 'pt-16' : undefined}>{children}</div>
+          <Header />
+          <div className="pt-16">{children}</div>
           <Toaster position="top-right" />
         </SessionProvider>
       </body>

@@ -1,0 +1,8 @@
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+
+export default async function ServerLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions)
+
+  return <>{children}</>
+}
