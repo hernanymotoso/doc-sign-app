@@ -7,11 +7,7 @@ import { authOptions } from '@/lib/auth'
 import { z } from 'zod'
 import { uploadSchema } from './schema'
 import { ServerError } from '@/actions/_errors/server-error'
-
-export type UploadDocumentState = {
-  errorMessage?: string
-  successMessage?: string
-}
+import { UploadDocumentState } from './types'
 
 export async function uploadDocument(
   _: UploadDocumentState,
