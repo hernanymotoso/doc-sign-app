@@ -6,6 +6,8 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { DocumentListState } from './types'
 import { DeleteDocumentButton } from '../DeleteDocumentButton'
+import { Button } from '@/components/ui/Button'
+import Link from 'next/link'
 
 export function DocumentList() {
   const [state, action, isPending] = useActionState<DocumentListState, number>(getDocuments, {
@@ -77,7 +79,11 @@ export function DocumentList() {
             <tbody>
               {state.documents.map(document => (
                 <tr key={document.id} className="border-b border-gray-700">
-                  <td className="px-6 py-4">{document.name}</td>
+                  <td className="px-6 py-4">
+                    <Link href={`/dashboard/documents/${document.id}`} className="hover:text-blue-400">
+                      {document.name}
+                    </Link>
+                  </td>
                   <td className="px-6 py-4">
                     {format(new Date(document.created_at), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
                   </td>
@@ -99,6 +105,11 @@ export function DocumentList() {
                     >
                       Visualizar
                     </button>
+                    {document.status === 'PENDING' && (
+                      <Button asChild variant="outline">
+                        <Link href={`/dashboard/documents/${document.id}/sign`}>Assinar</Link>
+                      </Button>
+                    )}
                     <DeleteDocumentButton documentId={document.id} onSuccess={handleDeleteSuccess} />
                   </td>
                 </tr>
