@@ -7,10 +7,12 @@ export const uploadSchema = z.object({
     .any()
     .refine((files: FileList) => files?.length === 1, 'Por favor, selecione um arquivo')
     .refine((files: FileList) => {
+      if (!files || files.length === 0) return false
       const file = files[0]
-      return file.size <= MAX_FILE_SIZE
+      return file?.size <= MAX_FILE_SIZE
     }, 'O arquivo deve ter no máximo 10MB')
     .refine((files: FileList) => {
+      if (!files || files.length === 0) return false
       const file = files[0]
       return file.type === 'application/pdf'
     }, 'Apenas arquivos PDF são permitidos'),
