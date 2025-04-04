@@ -29,6 +29,7 @@ export const getDocuments = cache(async (prevState: DocumentsResponse, page = 1)
           id: true,
           name: true,
           url: true,
+          status: true,
           created_at: true,
         },
         skip,
