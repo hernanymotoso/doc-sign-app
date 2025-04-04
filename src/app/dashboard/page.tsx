@@ -1,4 +1,4 @@
-import { DocumentList } from '@/components/DocumentList'
+import { DocumentList } from '@/components/context/DocumentList'
 import Link from 'next/link'
 
 export default function DashboardPage() {

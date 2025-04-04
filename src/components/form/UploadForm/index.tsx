@@ -1,7 +1,8 @@
 'use client'
 
-import { uploadDocument, UploadDocumentState } from '@/actions/document/upload'
+import { uploadDocument } from '@/actions/document/upload'
 import { uploadSchema } from '@/actions/document/upload/schema'
+import { UploadDocumentState } from '@/actions/document/upload/types'
 import { Button } from '@/components/ui/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { startTransition, useActionState, useEffect, useState } from 'react'

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-import { Header } from '@/components/Header'
+import { Header } from '@/components/context/Header'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import './globals.css'
