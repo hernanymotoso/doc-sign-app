@@ -11,6 +11,7 @@ import { register } from '@/actions/user/register'
 import toast from 'react-hot-toast'
 import { RegisterFormState } from './types'
 import { signIn } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 
 export function RegisterForm() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -45,6 +46,7 @@ export function RegisterForm() {
     if (formState.successMessage) {
       toast.success(formState.successMessage)
       form.reset()
+      redirect('/sign-in')
     }
   }, [formState, form])
 
