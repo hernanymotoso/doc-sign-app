@@ -5,8 +5,9 @@ import { startTransition, useActionState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { DeleteDocumentState } from '@/actions/document/delete/types'
 import { DeleteDocumentButtonProps } from './types'
+import { Button } from '@/components/ui/Button'
 
-export function DeleteDocumentButton({ documentId, onSuccess }: DeleteDocumentButtonProps) {
+export function DeleteDocumentButton({ documentId, onSuccess, children, className }: DeleteDocumentButtonProps) {
   const [state, action, isPending] = useActionState<DeleteDocumentState, string>(deleteDocument, {})
 
   const handleDelete = () => {
@@ -29,8 +30,15 @@ export function DeleteDocumentButton({ documentId, onSuccess }: DeleteDocumentBu
   }, [state, onSuccess])
 
   return (
-    <button onClick={handleDelete} disabled={isPending} className="text-red-500 hover:text-red-400 disabled:opacity-50">
-      {isPending ? 'Excluindo...' : 'Excluir'}
-    </button>
+    <Button onClick={handleDelete} disabled={isPending} variant="destructive" size="sm" className={className}>
+      {isPending ? (
+        <>
+          <div className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          <span className="ml-2 hidden sm:inline">Excluindo...</span>
+        </>
+      ) : (
+        children
+      )}
+    </Button>
   )
 }
