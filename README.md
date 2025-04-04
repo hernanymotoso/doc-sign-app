@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Document Signing App
+
+A web application for secure document signing and management.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Docker and Docker Compose
+- AWS S3 Bucket
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd doc-sign-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Set up environment variables:
+   - Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   - Fill in the required environment variables:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```env
+   # Database
+   DATABASE_URL="postgresql://test:test123@db:5432/sample_db"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   # NextAuth
+   NEXTAUTH_URL="http://localhost:3000"
+   NEXTAUTH_SECRET="your-secret-key"
 
-## Learn More
+   # AWS S3
+   AWS_ACCESS_KEY_ID="your-access-key"
+   AWS_SECRET_ACCESS_KEY="your-secret-key"
+   AWS_BUCKET_NAME="your-bucket-name"
+   AWS_REGION="your-region"
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+### Environment Variables Explained
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `DATABASE_URL`: PostgreSQL connection string (pre-configured for Docker setup)
+- `NEXTAUTH_URL`: The base URL of your application
+- `NEXTAUTH_SECRET`: A secret key for NextAuth.js (you can generate one with `openssl rand -base64 32`)
+- `AWS_ACCESS_KEY_ID`: Your AWS access key for S3
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret key for S3
+- `AWS_BUCKET_NAME`: The name of your S3 bucket for storing documents
+- `AWS_REGION`: The AWS region of your S3 bucket (e.g., "us-east-1")
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Running with Docker
 
-## Deploy on Vercel
+1. Start the containers:
+```bash
+docker-compose up -d
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Run database migrations:
+```bash
+docker-compose exec app npx prisma migrate dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application will be available at `http://localhost:3000`.
+
+### Docker Services
+
+- `app`: Next.js application
+- `postgres`: PostgreSQL database
+- `pgadmin`: PostgreSQL admin interface (optional)
+
+To stop the services:
+```bash
+docker-compose down
+```
+
+## Features
+
+- 📄 Document upload and management
+- ✍️ Digital signatures
+- 🔒 Secure document storage
+- 👥 Multi-user support
+- 📱 Responsive design
