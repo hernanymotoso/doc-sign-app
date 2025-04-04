@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { signInSchema } from './schema'
+import Link from 'next/link'
 
 export function SignInForm() {
   const form = useForm<z.infer<typeof signInSchema>>({
@@ -98,6 +99,10 @@ export function SignInForm() {
             ) : (
               'Entrar'
             )}
+          </Button>
+
+          <Button asChild variant="outline" className="mt-6 w-full">
+            <Link href="/register">Criar conta</Link>
           </Button>
         </form>
 
