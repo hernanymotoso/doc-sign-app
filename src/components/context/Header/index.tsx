@@ -16,6 +16,7 @@ export function Header() {
         {session?.user ? (
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-400">{session.user.email}</span>
+
             <button
               onClick={() => signOut({ callbackUrl: '/sign-in' })}
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"

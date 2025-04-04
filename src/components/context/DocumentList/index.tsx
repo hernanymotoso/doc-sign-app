@@ -58,6 +58,7 @@ export function DocumentList() {
             <div className="size-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
           </div>
         )}
+
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-gray-400">
             <thead className="bg-gray-700 text-xs uppercase text-gray-400">
@@ -65,17 +66,21 @@ export function DocumentList() {
                 <th scope="col" className="px-6 py-3">
                   Nome
                 </th>
+
                 <th scope="col" className="px-6 py-3">
                   Data de criação
                 </th>
+
                 <th scope="col" className="px-6 py-3">
                   Status
                 </th>
+
                 <th scope="col" className="px-6 py-3 text-right">
                   Ações
                 </th>
               </tr>
             </thead>
+
             <tbody>
               {state.documents.map(document => (
                 <tr key={document.id} className="border-b border-gray-700">
@@ -84,9 +89,11 @@ export function DocumentList() {
                       {document.name}
                     </Link>
                   </td>
+
                   <td className="px-6 py-4">
                     {format(new Date(document.created_at), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
                   </td>
+
                   <td className="px-6 py-4">
                     <span
                       className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
@@ -98,6 +105,7 @@ export function DocumentList() {
                       {document.status === 'SIGNED' ? 'Assinado' : 'Pendente'}
                     </span>
                   </td>
+
                   <td className="flex justify-end gap-4 px-6 py-4">
                     <button
                       onClick={() => window.open(document.url, '_blank')}
@@ -105,6 +113,7 @@ export function DocumentList() {
                     >
                       Visualizar
                     </button>
+
                     {document.status === 'PENDING' && (
                       <Button asChild variant="outline">
                         <Link href={`/dashboard/documents/${document.id}/sign`}>Assinar</Link>
@@ -114,6 +123,7 @@ export function DocumentList() {
                   </td>
                 </tr>
               ))}
+
               {state.documents.length === 0 && (
                 <tr>
                   <td colSpan={3} className="px-6 py-8 text-center text-gray-500">
