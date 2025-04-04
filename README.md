@@ -11,9 +11,9 @@ A web application for secure document signing and management.
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository (SSH):
 ```bash
-git clone <repository-url>
+git clone git@github.com:hernanymotoso/doc-sign-app.git
 cd doc-sign-app
 ```
 
