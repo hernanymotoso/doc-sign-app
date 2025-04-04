@@ -15,7 +15,7 @@ export const getDocuments = cache(async (prevState: DocumentsResponse, page = 1)
     if (!session?.user) {
       return {
         ...prevState,
-        error: 'Unauthorized',
+        error: 'Você precisa estar logado para ver seus documentos.',
       }
     }
 
