@@ -2,11 +2,6 @@
 
 A web application for secure document signing and management.
 
-## Demo
-
-[Watch the full demo video](https://drive.google.com/file/d/1bV26x6mou6M6F53QzLSUghajZxqKTr3Z/view?usp=sharing)
-
-
 ## Getting Started
 
 ### Prerequisites
